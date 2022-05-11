@@ -40,13 +40,13 @@ public class BellmanFord {
 		
 		for(int i=1; i<vertex; ++i) {
 			for(int j=0; j<edges; ++j) {
-				int u = grafo.
+//				int u = grafo.
 			}
 		}
 	}
 
 	public static void main(String[] args) {
-		Grafo grafo = new Grafo(true);
+		Grafo grafo = new Grafo();
 
 		for (int i = 0; i < 5; i++) {
 			grafo.adicionaVertice(i);
@@ -63,7 +63,7 @@ public class BellmanFord {
 		Vertice inicio = grafo.getVertice(1);
 		Integer vertexCount = grafo.vertexCount();
 		BellmanFord bf = new BellmanFord();
-		bf.runAlgorithm(inicio, 0, 0);
+//		bf.runAlgorithm(inicio, 0, 0);
 
 	}
 }

@@ -26,7 +26,7 @@ public class BuscaEmProfundidade {
 	}
 	
 	public static void main(String[] args) {
-		Grafo grafo = new Grafo(true);
+		Grafo grafo = new Grafo();
 		grafo.adicionaVertice(0);
 		grafo.adicionaVertice(1);
 		grafo.adicionaVertice(2);
@@ -58,7 +58,7 @@ public class BuscaEmProfundidade {
 //		grafo.adicionaArestaOrientado(4, 6, 5);
 //		grafo.adicionaArestaOrientado(5, 6, 17);
 		
-		Vertice inicio = grafo.getVertice(2);
+		Vertice inicio = grafo.getVertice(3);
 		
 		BuscaEmProfundidade bep = new BuscaEmProfundidade();
 		bep.runAlgorithm(inicio);

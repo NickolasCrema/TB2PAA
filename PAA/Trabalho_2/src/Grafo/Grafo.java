@@ -8,10 +8,9 @@ public class Grafo {
 	private ArrayList<Aresta> arestas;
 	private Boolean orientado;
 
-	public Grafo(Boolean orientado) {
+	public Grafo() {
 		this.vertices = new ArrayList<Vertice>();
 		this.arestas = new ArrayList<Aresta>();
-		this.orientado = orientado;
 	}
 
 	public void adicionaVertice(Integer dado) {
@@ -89,5 +88,9 @@ public class Grafo {
 
 	public Boolean getOrientado() {
 		return orientado;
+	}
+
+	public void setOrientado(Boolean orientado) {
+		this.orientado = orientado;
 	}
 }

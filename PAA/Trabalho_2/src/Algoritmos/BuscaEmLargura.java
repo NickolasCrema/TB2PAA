@@ -35,7 +35,7 @@ public class BuscaEmLargura {
 	}
 	
 	public static void main(String[] args) {
-		Grafo grafo = new Grafo(true);
+		Grafo grafo = new Grafo();
 		grafo.adicionaVertice(0);
 		grafo.adicionaVertice(1);
 		grafo.adicionaVertice(2);
