@@ -4,7 +4,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
-import Algoritmos.BuscaEmLargura;
+import Algoritmos.BuscaEmProfundidade;
 import Grafo.Grafo;
 import Grafo.Vertice;
 
@@ -32,10 +32,10 @@ public class LerArquivo {
 		for(int i=0; i<vertices; i++) {
 			grafo.adicionaVertice(i);
 		}
-		vet = new String[3];
+		vet = new String[4];
 		while((linha = br.readLine()) != null) {
 			vet = linha.split("[(,):]+");
-			grafo.adicionaAresta(Integer.parseInt(vet[0]), Integer.parseInt(vet[1]), Integer.parseInt(vet[2]));
+			grafo.adicionaAresta(Integer.parseInt(vet[1]), Integer.parseInt(vet[2]), Integer.parseInt(vet[3]));
 		}
 		
 		return grafo;
@@ -44,10 +44,10 @@ public class LerArquivo {
 	public static void main(String[] args) {
 		LerArquivo la = new LerArquivo();
 		try {
-			Grafo grafo = la.geraGrafo("C:/Nova pasta/fonte1.txt");
+			Grafo grafo = la.geraGrafo("fonte1.txt.txt");
 			Vertice vertice = grafo.getVertice(3);
-			BuscaEmLargura bel = new BuscaEmLargura(vertice);
-			bel.runAlgorithm();
+			BuscaEmProfundidade bel = new BuscaEmProfundidade();
+			bel.runAlgorithm(vertice);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
