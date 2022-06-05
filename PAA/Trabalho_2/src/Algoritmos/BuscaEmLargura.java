@@ -2,61 +2,61 @@ package Algoritmos;
 
 import java.util.ArrayList;
 
-import Grafo.Grafo;
-import Grafo.Vertice;
+import Graph.Graph;
+import Graph.Vertex;
 
 public class BuscaEmLargura {
-	private ArrayList<Vertice> marcados;
-	private ArrayList<Vertice> fila;
-	private Vertice atual;
+	private ArrayList<Vertex> tagged;
+	private ArrayList<Vertex> queue;
+	private Vertex current;
 	
-	public BuscaEmLargura(Vertice inicio) {
-		this.atual = inicio;
-		this.marcados = new ArrayList<Vertice>();
-		this.fila = new ArrayList<Vertice>();
+	public BuscaEmLargura(Vertex src) {
+		this.current = src;
+		this.tagged = new ArrayList<Vertex>();
+		this.queue = new ArrayList<Vertex>();
 	}
 	
 	public void runAlgorithm() {
-		marcados.add(atual);
-		System.out.print(atual.getDado());
-		fila.add(atual);
-		while(fila.size() > 0) {
-			Vertice visitado = fila.get(0);
-			for(int i=0; i < visitado.getArestasSaida().size(); i++) {
-				Vertice proximo = visitado.getArestasSaida().get(i).getFim();
-				if(!marcados.contains(proximo)) {
-					marcados.add(proximo);
-					System.out.print(" -> " + proximo.getDado());
-					fila.add(proximo);
+		tagged.add(current);
+		System.out.print(current.getData());
+		queue.add(current);
+		while(queue.size() > 0) {
+			Vertex visited = queue.get(0);
+			for(int i=0; i < visited.getOutgoingEdge().size(); i++) {
+				Vertex next = visited.getOutgoingEdge().get(i).getEnd();
+				if(!tagged.contains(next)) {
+					tagged.add(next);
+					System.out.print(" -> " + next.getData());
+					queue.add(next);
 				}
 			}
-			fila.remove(0);
+			queue.remove(0);
 		}
 	}
 	
 	public static void main(String[] args) {
-		Grafo grafo = new Grafo();
-		grafo.adicionaVertice(0);
-		grafo.adicionaVertice(1);
-		grafo.adicionaVertice(2);
-		grafo.adicionaVertice(3);
-		grafo.adicionaVertice(4);
-		grafo.adicionaVertice(5);
-		grafo.adicionaVertice(6);
+		Graph grafo = new Graph();
+		grafo.addVertex(0);
+		grafo.addVertex(1);
+		grafo.addVertex(2);
+		grafo.addVertex(3);
+		grafo.addVertex(4);
+		grafo.addVertex(5);
+		grafo.addVertex(6);
 		
-		grafo.adicionaArestaOrientado(0, 3, 5);
-		grafo.adicionaArestaOrientado(0, 5, 11);
-		grafo.adicionaArestaOrientado(0, 2, 8);
-		grafo.adicionaArestaOrientado(1, 3, 2);
-		grafo.adicionaArestaOrientado(1, 4, 18);
-		grafo.adicionaArestaOrientado(2, 3, 7);
-		grafo.adicionaArestaOrientado(2, 5, 4);
-		grafo.adicionaArestaOrientado(2, 4, 3);
-		grafo.adicionaArestaOrientado(4, 5, -1);
-		grafo.adicionaArestaOrientado(4, 6, 5);
-		grafo.adicionaArestaOrientado(5, 6, 17);
+		grafo.addEdgeDirected(0, 3, 5);
+		grafo.addEdgeDirected(0, 5, 11);
+		grafo.addEdgeDirected(0, 2, 8);
+		grafo.addEdgeDirected(1, 3, 2);
+		grafo.addEdgeDirected(1, 4, 18);
+		grafo.addEdgeDirected(2, 3, 7);
+		grafo.addEdgeDirected(2, 5, 4);
+		grafo.addEdgeDirected(2, 4, 3);
+		grafo.addEdgeDirected(4, 5, -1);
+		grafo.addEdgeDirected(4, 6, 5);
+		grafo.addEdgeDirected(5, 6, 17);
 		
-		Vertice inicio = grafo.getVertice(2);
+		Vertex inicio = grafo.getVertex(2);
 		
 		BuscaEmLargura busca = new BuscaEmLargura(inicio);
 		busca.runAlgorithm();

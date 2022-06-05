@@ -4,50 +4,58 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
-import Algoritmos.BuscaEmProfundidade;
-import Grafo.Grafo;
-import Grafo.Vertice;
+import Algoritmos.BellmanFord;
+import Graph.Graph;
+import Graph.Vertex;
 
 public class LerArquivo {
-	
-	public LerArquivo() {}
 
-	
-	public Grafo geraGrafo(String path) throws IOException {
-		Grafo grafo = new Grafo();
+	public LerArquivo() {
+	}
+
+	public Graph geraGrafo(String path) throws IOException {
+		Graph graph = new Graph();
 		BufferedReader br = new BufferedReader(new FileReader(path));
-		String linha = "";
-		linha = br.readLine();
+		String line = "";
+		line = br.readLine();
 		String[] vet = new String[2];
-		vet = linha.split("=");
-		if(vet[1]=="sim") {
-			grafo.setOrientado(true);
+		vet = line.split("=");
+		if (vet[1].equals("sim")) {
+			graph.setDirected(true);
+		} else {
+			graph.setDirected(false);
 		}
-		else {
-			grafo.setOrientado(false);
-		}
-		linha = br.readLine();
-		vet = linha.split("=");
+		line = br.readLine();
+		vet = line.split("=");
 		int vertices = Integer.parseInt(vet[1]);
-		for(int i=0; i<vertices; i++) {
-			grafo.adicionaVertice(i);
+		for (int i = 0; i < vertices; i++) {
+			graph.addVertex(i);
 		}
 		vet = new String[4];
-		while((linha = br.readLine()) != null) {
-			vet = linha.split("[(,):]+");
-			grafo.adicionaAresta(Integer.parseInt(vet[1]), Integer.parseInt(vet[2]), Integer.parseInt(vet[3]));
+		if (graph.getDirected() == false) {
+			while ((line = br.readLine()) != null) {
+				vet = line.split("[(,):]+");
+				graph.addEdge(Integer.parseInt(vet[1]), Integer.parseInt(vet[2]), Integer.parseInt(vet[3]));
+			}
 		}
-		
-		return grafo;
+		else {
+			while ((line = br.readLine()) != null) {
+				vet = line.split("[(,):]+");
+				graph.addEdgeDirected(Integer.parseInt(vet[1]), Integer.parseInt(vet[2]), Integer.parseInt(vet[3]));
+			}
+		}
+
+		return graph;
 	}
-	
+
 	public static void main(String[] args) {
 		LerArquivo la = new LerArquivo();
 		try {
-			Grafo grafo = la.geraGrafo("fonte1.txt.txt");
-			Vertice vertice = grafo.getVertice(3);
-			BuscaEmProfundidade bel = new BuscaEmProfundidade();
-			bel.runAlgorithm(vertice);
+			Graph grafo = la.geraGrafo("fonte2.txt");
+			Vertex vertice = grafo.getVertex(3);
+			int size = grafo.getVertices().size();
+			BellmanFord bel = new BellmanFord(size);
+			bel.runAlgorithm(grafo, 1);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
